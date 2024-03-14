@@ -10,5 +10,9 @@ interface Config {
   mongodb: {
     uri: string,
   };
+  redis: {
+    host: string;
+    port: number;
+  };
 }
 ```
