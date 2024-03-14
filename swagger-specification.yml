@@ -1,0 +1,183 @@
+openapi: 3.0.0
+info:
+  title: coffee-cart-svc API
+  description: API for managing coffee carts
+  version: 1.0.0
+servers:
+  - url: http://localhost:5002
+paths:
+  /health:
+    get:
+      summary: Get Health
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      x-postman-name: Get Health
+  /{user_id}:
+    get:
+      summary: Get Cart
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        quantity:
+                          type: integer
+                        userId:
+                          type: string
+                        coffeeId:
+                          type: string
+                        createdAt:
+                          type: string
+                        __v:
+                          type: integer
+      x-postman-name: Get Cart
+    delete:
+      summary: Delete Cart
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      acknowledged:
+                        type: boolean
+                      deletedCount:
+                        type: integer
+      x-postman-name: Delete Cart
+  /add/{user_id}/{coffee_id}:
+    post:
+      summary: Add to Cart
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+        - in: path
+          name: coffee_id
+          required: true
+          schema:
+            type: string
+          description: ID of the coffee
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      quantity:
+                        type: integer
+                      userId:
+                        type: string
+                      coffeeId:
+                        type: string
+                      createdAt:
+                        type: string
+                      __v:
+                        type: integer
+      x-postman-name: Add to Cart
+    delete:
+      summary: Remove From Cart
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+        - in: path
+          name: coffee_id
+          required: true
+          schema:
+            type: string
+          description: ID of the coffee
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      quantity:
+                        type: integer
+                      userId:
+                        type: string
+                      coffeeId:
+                        type: string
+                      createdAt:
+                        type: string
+                      __v:
+                        type: integer
+      x-postman-name: Remove From Cart
+components:
+  securitySchemes: {}
